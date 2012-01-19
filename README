@@ -6,3 +6,5 @@ These commands will take a while to run.
 
    $ ./manage.py compress_geonames
    $ ./manage.py load_geonames
+
+This fork removes the dependency on GeoDjango.

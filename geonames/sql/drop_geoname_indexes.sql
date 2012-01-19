@@ -1,4 +1,3 @@
-DROP INDEX "geonames_geoname_point_id"; 
 DROP INDEX "geonames_geoname_name"; 
 DROP INDEX "geonames_geoname_fclass";
 DROP INDEX "geonames_geoname_fcode";

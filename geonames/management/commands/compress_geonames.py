@@ -57,7 +57,7 @@ class Command(NoArgsCommand):
                     # Getting the EWKT for the point -- has to be EWKT or else
                     # the insertion of the point will raise a constraint error for
                     # for a non-matching ID.
-                    wkt = 'SRID=4326;POINT(%s %s)' % (row['longitude'], row['latitude'])
+                    wkt = '%s,%s' % (row['longitude'], row['latitude'])
                 except KeyError:
                     sys.stderr.write('Invalid row (line %d):\n' % i)
                     sys.stderr.write('%s\n' % str(row))

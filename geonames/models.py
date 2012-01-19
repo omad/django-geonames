@@ -1,4 +1,4 @@
-from django.contrib.gis.db import models
+from django.db import models
 from django.conf import settings
 
 class BigIntegerField(models.PositiveIntegerField):
@@ -15,16 +15,12 @@ class Admin1Code(models.Model):
     code = models.CharField(max_length=6)
     name = models.CharField(max_length=58)
 
-    objects = models.GeoManager()
-
     def __unicode__(self):
         return u': '.join([self.code, self.name])
 
 class Admin2Code(models.Model):
     code = models.CharField(max_length=32)
     name = models.CharField(max_length=46)
-
-    objects = models.GeoManager()
 
     def __unicode__(self):
         return u': '.join([self.code, self.name])
@@ -34,12 +30,10 @@ class TimeZone(models.Model):
     gmt_offset = models.FloatField()
     dst_offset = models.FloatField()
 
-    objects = models.GeoManager()
-
     def __unicode__(self):
         return self.tzid
 
-class GeonameManager(models.GeoManager):
+class GeonameManager(models.Manager):
     def countries(self, *args, **kwargs):
         '''
         Filter returns only countries
@@ -69,7 +63,7 @@ class Geoname(models.Model):
     topo = models.IntegerField(db_index=True)
     timezone = models.CharField(max_length=30, blank=True)
     moddate = models.DateField('Date of Last Modification')
-    point = models.PointField(null=True)
+    point = models.CharField(max_length=50, blank=True)
 
     objects = GeonameManager()
 
@@ -101,8 +95,6 @@ class Alternate(models.Model):
     variant = models.CharField(max_length=200, db_index=True)
     preferred = models.BooleanField(db_index=True)
     short = models.BooleanField()
-
-    objects = models.GeoManager()
 
     def __unicode__(self):
         return self.geoname.name
